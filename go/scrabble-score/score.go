@@ -2,31 +2,45 @@
 package scrabble
 
 import (
-	"strings"
+	"unicode"
 )
 
 //A map of the scores for each letter
-var letterScores = map[string]int{
-	"AEIOULNRST": 1,
-	"DG":         2,
-	"BCMP":       3,
-	"FHVWY":      4,
-	"K":          5,
-	"JX":         8,
-	"QZ":         10}
+var letterScores = map[rune]int{
+	'A': 1,
+	'E': 1,
+	'I': 1,
+	'O': 1,
+	'U': 1,
+	'L': 1,
+	'R': 1,
+	'N': 1,
+	'S': 1,
+	'T': 1,
+	'D': 2,
+	'G': 2,
+	'B': 3,
+	'C': 3,
+	'M': 3,
+	'P': 3,
+	'F': 4,
+	'H': 4,
+	'V': 4,
+	'W': 4,
+	'Y': 4,
+	'K': 5,
+	'J': 8,
+	'X': 8,
+	'Q': 10,
+	'Z': 10,
+}
 
 //Score returns the scrabble score of the input
 func Score(str string) int {
-
 	sum := 0
-	str = strings.ToUpper(str)
-	for _, l := range str {
-		for key, val := range letterScores {
-			if strings.Contains(key, string(l)) {
-				sum += val
-				break
-			}
-		}
+	for _, char := range str {
+		char = unicode.ToUpper(char)
+		sum += letterScores[char]
 	}
 	return sum
 }
