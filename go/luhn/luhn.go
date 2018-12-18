@@ -2,7 +2,6 @@
 package luhn
 
 import (
-	"fmt"
 	"unicode"
 )
 
@@ -46,7 +45,6 @@ func Valid(input string) bool {
 			shouldDouble = true
 		}
 		loops++
-		fmt.Println(i, val, sum)
 	}
 
 	if loops < 2 {
