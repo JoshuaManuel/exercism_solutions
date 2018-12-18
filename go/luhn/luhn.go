@@ -12,24 +12,21 @@ func Valid(input string) bool {
 	loops := 0 //choose to count loops because the input may have spaces or other non-digits
 	for i := len(input) - 1; i >= 0; i-- {
 
+		char := rune(input[i])
+
+		if unicode.IsSpace(char) {
+			continue
+		}
+
 		//if the character isn't a digit or space, then the input is malformed!
-		if !(unicode.IsDigit(rune(input[i])) || unicode.IsSpace(rune(input[i]))) {
+		if !unicode.IsDigit(char) {
 			return false
 		}
 
-		//we can have spaces in the card number; just make sure we don't count it as a digit
-		if unicode.IsSpace(rune(input[i])) {
-			continue
-		}
-		//get the value of what can now only be a digit, not the
+		//get the value of what can now only be a digit
 		val := input[i] - '0'
 
 		if shouldDouble {
-			/* this implementation is less apparent to the programmer
-			if val != 9 {
-				val = (val * 2) % 9
-			}
-			*/
 			val = val * 2
 			if val > 9 {
 				val = val - 9
@@ -38,12 +35,7 @@ func Valid(input string) bool {
 
 		sum += int(val)
 
-		//toggle the shouldDouble variable
-		if shouldDouble {
-			shouldDouble = false
-		} else {
-			shouldDouble = true
-		}
+		shouldDouble = !shouldDouble
 		loops++
 	}
 
