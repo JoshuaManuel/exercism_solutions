@@ -9,7 +9,7 @@ import (
 func Valid(input string) bool {
 	shouldDouble := false
 	sum := 0
-	loops := 0 //choose to count loops because the input may have spaces or other non-digits
+	digits := 0 //choose to count loops because the input may have spaces or other non-digits
 	for i := len(input) - 1; i >= 0; i-- {
 
 		char := rune(input[i])
@@ -27,7 +27,7 @@ func Valid(input string) bool {
 		val := input[i] - '0'
 
 		if shouldDouble {
-			val = val * 2
+			val *= 2
 			if val > 9 {
 				val = val - 9
 			}
@@ -36,10 +36,10 @@ func Valid(input string) bool {
 		sum += int(val)
 
 		shouldDouble = !shouldDouble
-		loops++
+		digits++
 	}
 
-	if loops < 2 {
+	if digits < 2 {
 		return false
 	}
 	if sum%10 == 0 {
