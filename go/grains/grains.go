@@ -3,7 +3,6 @@ package grains
 
 import (
 	"errors"
-	"fmt"
 )
 
 //Square computes the number of grains that will be delivered on a certain day
@@ -20,7 +19,7 @@ func Total() uint64 {
 	for i := 1; i <= 64; i++ {
 		squared, err := Square(i)
 		if err != nil {
-			fmt.Println(err)
+			panic(err)
 		}
 		sum += squared
 	}
