@@ -15,13 +15,5 @@ func Square(num int) (uint64, error) {
 
 //Total will compute the total number of grains by the 64th day
 func Total() uint64 {
-	var sum uint64
-	for i := 1; i <= 64; i++ {
-		squared, err := Square(i)
-		if err != nil {
-			panic(err)
-		}
-		sum += squared
-	}
-	return sum
+	return 1<<uint64(64) - 1
 }
